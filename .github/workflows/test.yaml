@@ -1,12 +1,7 @@
 name: Test Action
 on:
-  workflow_dispatch:
-
-    inputs:
-      payload:
-        description: "postman Payload"
-        required: true
-        default: '{}'
+  repository_dispatch: webhook
+  
 
 jobs:
   hello:
@@ -26,6 +21,7 @@ jobs:
           
       - name: check Version
         run: node --version
+        
       - name: Install Jq
         uses: dcarbone/install-jq-action@v2.0.2
 
