@@ -1,6 +1,7 @@
 name: Test Action
 on:
-  repository_dispatch: webhook
+  repository_dispatch:
+    types: webhook
   
 
 jobs:
