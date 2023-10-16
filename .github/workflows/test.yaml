@@ -29,7 +29,7 @@ jobs:
       - name: process Webhook
         id: webhook
         run: |
-          input_data=${{toJSON(github.event.inputs.payload)}}
+          input_data=${{toJSON(github.event.client_payload)}}
           key_value=$(echo $input_data | jq -r .key)
 
           echo 'Payload -$key_value'
