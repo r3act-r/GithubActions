@@ -1,0 +1,38 @@
+name: Test Action
+on:
+  workflow_dispatch:
+
+    inputs:
+      payload:
+        description: "postman Payload"
+        required: true
+        default: '{}'
+
+jobs:
+  hello:
+    runs-on: window-latest
+    steps:
+      - name: checkout
+        uses: action/checkout@v2.3.1
+        
+      - name: execute
+        run: echo "Hello world"
+        shell: bash
+        
+      - name: Set up NodeJs environment
+        uses: action/checkout@v2.3.1
+        with:
+          node-version: 18
+          
+      - name: check Version
+        run: node --version
+      - name: Install Jq
+        uses: dcarbone/install-jq-action@v2.0.2
+
+      - name: process Webhook
+        id: webhook
+        run: |
+          input_data=${{toJSON(github.event.inputs.payload)}}
+          key_value=$(echo $input_data | jq -r .key)
+
+          echo 'Payload -$key_value'
