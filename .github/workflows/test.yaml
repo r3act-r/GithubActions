@@ -14,6 +14,12 @@ jobs:
       - name: execute
         run: echo "Hello world"
         shell: bash
+
+      - name: payload processing
+        run: | 
+          echo ":: set-env
+          name=PAYLOAD::${{toJSON(github.event.client_payload)}}
+          "
         
       - name: Set up NodeJs environment
         uses: actions/setup-node@v3.8.1
@@ -23,13 +29,9 @@ jobs:
       - name: check Version
         run: node --version
         
-      - name: Install Jq
-        uses: dcarbone/install-jq-action@v2.0.2
+      - name: Install dependencies
+        run: npm install
 
-      - name: process Webhook
-        id: webhook
-        run: |
-          input_data=${{toJSON(github.event.client_payload.name)}}
-          key_value=$(echo $input_data | jq -r .key)
+      - name: Run node file
+        run: node index.js
 
-          echo 'Payload -$key_value'
