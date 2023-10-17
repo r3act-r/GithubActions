@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env: 
-      PAYLOAD_DATA: ${{github.event.client_payload}}
+      PAYLOAD_DATA: ${{github.event.client_payload.data}}
       
     steps:
       - name: checkout
