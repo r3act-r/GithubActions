@@ -28,6 +28,9 @@ jobs:
           
       - name: check Version
         run: node --version
+
+      - name : Creating Package.Json
+        run: npm init -y
         
       - name: Install dependencies
         run: npm install
