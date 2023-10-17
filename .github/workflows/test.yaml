@@ -7,6 +7,10 @@ on:
 jobs:
   hello:
     runs-on: ubuntu-latest
+
+    env: 
+      PAYLOAD_DATA: ${{github.event.client_payload.data}}
+      
     steps:
       - name: checkout
         uses: actions/checkout@v2.3.1
